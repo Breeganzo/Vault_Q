@@ -1,0 +1,67 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ─── Topics ──────────────────────────────────
+    match /topics/{topicId} {
+      // Anyone can read topics
+      allow read: if true;
+
+      // Only admin can create or delete
+      allow create, delete: if request.auth != null
+        && request.auth.token.admin == true;
+
+      // Admin can update anything
+      allow update: if request.auth != null
+        && request.auth.token.admin == true;
+
+      // Students can only reserve available topics
+      allow update: if request.auth != null
+        && resource.data.status == "available"
+        && request.resource.data.status == "reserved"
+        && request.resource.data.purchasedBy == request.auth.uid;
+    }
+
+    // ─── Orders ──────────────────────────────────
+    match /orders/{orderId} {
+      // Admin can read all orders
+      allow read: if request.auth != null
+        && request.auth.token.admin == true;
+
+      // Students can read their own orders
+      allow read: if request.auth != null
+        && resource.data.studentId == request.auth.uid;
+
+      // Authenticated users can create orders (for themselves)
+      allow create: if request.auth != null
+        && request.resource.data.studentId == request.auth.uid;
+
+      // Students can only update utrNumber on their pending orders
+      allow update: if request.auth != null
+        && resource.data.studentId == request.auth.uid
+        && resource.data.paymentStatus == "pending";
+
+      // Admin can update any order
+      allow update: if request.auth != null
+        && request.auth.token.admin == true;
+    }
+
+    // ─── Inquiries ───────────────────────────────
+    match /inquiries/{inquiryId} {
+      // Anyone can create an inquiry (contact form)
+      allow create: if true;
+
+      // Only admin can read and update
+      allow read, update: if request.auth != null
+        && request.auth.token.admin == true;
+    }
+
+    // ─── Site Config ─────────────────────────────
+    match /siteConfig/{docId} {
+      allow read: if true;
+      allow write: if request.auth != null
+        && request.auth.token.admin == true;
+    }
+  }
+}

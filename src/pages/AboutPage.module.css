@@ -1,0 +1,112 @@
+.about-hero {
+  padding: var(--space-3xl) 0;
+  text-align: center;
+  background: linear-gradient(135deg, var(--color-primary-bg) 0%, var(--color-bg) 100%);
+}
+
+.about-hero h1 { margin-bottom: var(--space-md); }
+.about-hero p { font-size: 1.125rem; max-width: 640px; margin: 0 auto; }
+
+.about-story {
+  padding: var(--space-4xl) 0;
+}
+
+.about-story-inner {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.about-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 2.5rem;
+  margin: 0 auto var(--space-xl);
+}
+
+.about-story-inner h2 {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.about-story-inner p {
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  color: var(--color-text-secondary);
+}
+
+.about-values {
+  padding: var(--space-3xl) 0;
+  background: var(--color-surface);
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-lg);
+  margin-top: var(--space-xl);
+}
+
+.value-card {
+  text-align: center;
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.value-icon {
+  font-size: 2rem;
+  margin-bottom: var(--space-md);
+  color: var(--color-primary);
+}
+
+.value-card h3 {
+  font-size: 1.125rem;
+  margin-bottom: var(--space-sm);
+}
+
+.value-card p {
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.about-disclaimer {
+  padding: var(--space-2xl) 0;
+  background: var(--color-bg);
+}
+
+.disclaimer-box {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: var(--space-xl);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+  text-align: center;
+}
+
+.disclaimer-box h3 {
+  font-size: 1.125rem;
+  margin-bottom: var(--space-md);
+}
+
+.disclaimer-box p {
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .values-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+  .values-grid { grid-template-columns: 1fr; }
+}
